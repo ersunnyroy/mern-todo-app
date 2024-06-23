@@ -3,7 +3,12 @@ const mongoose = require('mongoose');
 const dbConnect = require('./config/dbCon');
 const express = require('express');
 const app = express();
+const cors = require('cors');
 
+//config
+const { corsOptions } = require('./config/corsOptions.js');
+
+app.use(cors(corsOptions));
 // init db connection
 dbConnect();
 
