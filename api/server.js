@@ -7,6 +7,8 @@ const cors = require('cors');
 
 // routes import
 const UserRoutes = require('./routes/UserRoutes');
+const TaskStatusRoutes = require('./routes/TaskStatusRoutes');
+const TaskRoutes = require('./routes/TaskRoutes');
 
 //config
 const { corsOptions } = require('./config/corsOption');
@@ -38,4 +40,4 @@ mongoose.connection.on('error', (err) => {
 
 
 // defined routes
-app.use('/api/v1', UserRoutes);
+app.use('/api/v1', [UserRoutes, TaskStatusRoutes, TaskRoutes]);

@@ -4,8 +4,9 @@ const Schema = mongoose.Schema;
 const TaskStatusSchema = new Schema({
         title: {
             type: String,
-            minlength:3,
-            required:true,
+            enum: ['To Do', 'In Progress', 'Completed'],
+            unique: true,
+            required: true,
         },
 });
 

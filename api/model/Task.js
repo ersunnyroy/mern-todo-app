@@ -12,7 +12,7 @@ const TaskSchema = new Schema({
             required: false,
             default: null
         },
-        task_status: {
+        status: {
             type: Schema.Types.ObjectId,
             ref: 'TaskStatus'
         },
