@@ -9,6 +9,7 @@ router.use(verifyJWT);
 
 // All task related routes
 router.route('/task')
-      .post(TaskController.createTask);
+      .post(TaskController.createTask)
+      .get(TaskController.getTasks);
 
 module.exports = router;

@@ -7,7 +7,7 @@ const createTask = async (req, res) => {
         console.log(owner);
         const newTask = await Task.create({
             title,
-            description, 
+            description,
             status,
             owner
         });
@@ -18,4 +18,19 @@ const createTask = async (req, res) => {
     }
 }
 
-module.exports = { createTask };
+const getTasks = async (req, res) => {
+    try {
+        const owner = req.user._id;
+        const tasks = await Task.find({ owner }).populate('status').populate({
+            path:'owner',
+            model:'User',
+            select:'firstname lastname _id'
+        }).exec();
+        res.status(200).send({ status: true, data: tasks });
+
+    } catch (err) {
+        res.status(500).send({ status: false, error_message: err.message });
+    }
+}
+
+module.exports = { createTask, getTasks };
