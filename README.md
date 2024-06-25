@@ -130,3 +130,34 @@ To-Do List App using MERN Stack
     "message": "Id is required to update task"
 }
 ```
+
+### 5. API TO Create Task Status : 
+
+#### URL: {{BASEURL}}/task-status
+#### Request Method: POST
+#### Body JSON:
+
+```json
+{
+    "title": "Completed"
+}
+```
+
+#### Success Response:
+```json
+{
+    "status": true,
+    "data": {
+        "title": "Completed",
+        "_id": "667a63de8bb5e183429ea9f2",
+        "__v": 0
+    }
+}
+```
+#### Failure Response:
+```json
+{
+    "status": false,
+    "error_message": "TaskStatus validation failed: title: `Deleted` is not a valid enum value for path `title`."
+}
+```
