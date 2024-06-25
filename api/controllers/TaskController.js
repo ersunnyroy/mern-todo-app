@@ -4,7 +4,6 @@ const createTask = async (req, res) => {
     try {
         const { title, description, status } = req.body;
         const owner = req.user._id;
-        console.log(owner);
         const newTask = await Task.create({
             title,
             description,
@@ -22,15 +21,35 @@ const getTasks = async (req, res) => {
     try {
         const owner = req.user._id;
         const tasks = await Task.find({ owner }).populate('status').populate({
-            path:'owner',
-            model:'User',
-            select:'firstname lastname _id'
+            path: 'owner',
+            model: 'User',
+            select: 'firstname lastname _id'
         }).exec();
-        res.status(200).send({ status: true, data: tasks });
+        return res.status(200).send({ status: true, data: tasks });
 
     } catch (err) {
-        res.status(500).send({ status: false, error_message: err.message });
+        return res.status(500).send({ status: false, error_message: err.message });
     }
 }
 
-module.exports = { createTask, getTasks };
+const updateTask = async (req, res) => {
+    try {
+        const updatedTask = {};
+        const owner = req.user._id;
+        const { id, title, description, status } = req.body;
+        console.log(id);
+        if (!id) {
+            return res.status(404).send({ status: false, message: `Id is required to update task` });
+        }
+
+        if (title) updatedTask.title = title;
+        if (description) updatedTask.description = description;
+        if (status) updatedTask.title = status;
+        const tasksUpdated = await Task.updateOne({ _id: id, owner: owner }, { $set: updatedTask });
+        return res.status(200).send({ status: true, data: tasksUpdated });
+    } catch (err) {
+        return res.status(500).send({ status: false, error_message: err.message });
+    }
+}
+
+module.exports = { createTask, getTasks, updateTask };
