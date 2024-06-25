@@ -1,5 +1,6 @@
 const Task = require('../model/Task');
 
+// function to create a task
 const createTask = async (req, res) => {
     try {
         const { title, description, status } = req.body;
@@ -17,6 +18,7 @@ const createTask = async (req, res) => {
     }
 }
 
+// function to get all task owned by a user
 const getTasks = async (req, res) => {
     try {
         const owner = req.user._id;
@@ -32,6 +34,7 @@ const getTasks = async (req, res) => {
     }
 }
 
+// function to update task 
 const updateTask = async (req, res) => {
     try {
         const updatedTask = {};
