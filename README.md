@@ -61,3 +61,72 @@ To-Do List App using MERN Stack
     "message": "Invalid Credentials"
 }
 ```
+### 3. API TO Create Task : 
+
+#### URL: {{BASEURL}}/task
+#### Request Method: POST
+#### Body JSON:
+
+```json
+{
+    "title" : "Task Number 1",
+    "description": "Testing task number 1 description",
+    "status": "6677fe08818430b3eab0aeb0"
+}
+```
+
+#### Success Response:
+```json
+{
+    "status": true,
+    "data": {
+        "title": "Task Number 1",
+        "description": "Testing task number 1 description",
+        "status": "6677fe08818430b3eab0aeb0",
+        "owner": "6677f493a030ab0d4ef8b59e",
+        "_id": "667a6241144d3eccdba18efa",
+        "__v": 0
+    }
+}
+```
+#### Failure Response:
+```json
+{
+    "status": false,
+    "error_message": "Task validation failed: title: Path `title` is required."
+}
+```
+
+### 4. API TO Update Task : 
+
+#### URL: {{BASEURL}}/task
+#### Request Method: PUT
+#### Body JSON:
+
+```json
+{
+    "id": "667802cf4bf83dc6c56764ab",
+    "title": "19588"
+}
+```
+
+#### Success Response:
+```json
+{
+    "status": true,
+    "data": {
+        "acknowledged": true,
+        "modifiedCount": 1,
+        "upsertedId": null,
+        "upsertedCount": 0,
+        "matchedCount": 1
+    }
+}
+```
+#### Failure Response:
+```json
+{
+    "status": false,
+    "message": "Id is required to update task"
+}
+```
